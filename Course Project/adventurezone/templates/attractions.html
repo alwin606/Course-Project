@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <a href="/adventurezone"><- Back</a> <br>
+</head>
+<body>
+    <h1>Attraction Details</h1><br>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="open_attractions">Open attractions only:</label>
+        <input type="checkbox" name="open_attractions" id="open_attractions">
+        <br>
+        <label for="sort_by">Sort by:</label>
+        <select name="sort_by" id="sort_by">
+            <option value="">--Select an option--</option>
+            <option value="queue">Queue time</option>
+            <option value="capacity">Capacity</option>
+            <option value="wait_time">Wait time</option>
+            <option value="maintenance">Maintenance</option>
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Capacity</th>
+                <th>Queue time</th>
+                <th>Wait time</th>
+                <th>Maintenance</th>
+                <th>Open</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attraction in attractions %}
+                <tr>
+                    <td>{{ attraction.name }}</td>
+                    <td>{{ attraction.type }}</td>
+                    <td>{{ attraction.capacity }}</td>
+                    <td>{{ attraction.queue }}</td>
+                    <td>{{ attraction.wait_time }}</td>
+                    <td>{% if attraction.maintenance %}Yes{% else %}No{% endif %}</td>
+                    <td>{% if attraction.open %}Open{% else %}Closed{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

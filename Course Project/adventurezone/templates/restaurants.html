@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <a href="/adventurezone"><- Back</a> <br>
+</head>
+<body>
+    <h1>Restaurant Details</h1><br>
+    <form method="GET" action="{% url 'restaurants_page' %}">
+        <label for="sort_by">Sort by:</label>
+        <select name="sort_by" id="sort_by">
+            <option value="">--Choose an option--</option>
+            <option value="open">Open Restaurants</option>
+            <option value="closed">Closed Restaurants</option>
+            <option value="sales">Total Sales</option>
+            <option value="type">Type</option>
+            <option value="capacity">Capacity</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Total Sales</th>
+            <th>Open</th>
+            <th>Type</th>
+            <th>Capacity</th>
+        </tr>
+        {% for row in restaurants %}
+        <tr>
+          <td>{{ row.name }}</td>
+          <td>{{ row.date }}</td>
+          <td>{{ row.total_sales }}</td>
+          <td>{% if row.open %}Open{% else %}Closed{% endif %}</td>
+            <td>{{ row.type }}</td>
+          <td>{{ row.capacity }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+</body>
+</html>

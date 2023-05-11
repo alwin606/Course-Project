@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <a href="/adventurezone"><- Back</a> <br>
+    {% csrf_token %}
+</head>
+<body>
+    <h1>Park Details</h1><br>
+    <form method="POST" action="{% url 'submit_form_park' %}">
+        {% csrf_token %}
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date">
+        <label for="num_workers">Num Workers:</label>
+        <input type="text" id="num_workers" name="num_workers">
+        <label for="attendance">Attendance:</label>
+        <input type="text" id="attendance" name="attendance">
+        <label for="weather">Weather:</label>
+        <input type="text" id="weather" name="weather">
+        <label for="capacity">Capacity:</label>
+        <input type="text" id="capacity" name="capacity">
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th># Workers</th>
+            <th>Attendance</th>
+            <th>Weather</th>
+            <th>Capacity</th>
+            <th>Total Sales</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+          <td>{{ row.date }}</td>
+          <td>{{ row.num_workers }}</td>
+          <td>{{ row.attendance }}</td>
+          <td>{{ row.weather }}</td>
+          <td>{{ row.capacity }}</td>
+            <td>{{ row.total_sales }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+</body>
+</html>
